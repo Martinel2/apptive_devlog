@@ -2,12 +2,12 @@ package apptive.devlog.Global.Exception;
 
 import apptive.devlog.Global.Response.Error.ErrorCode;
 
-public class InvalidTokenException extends RuntimeException {
+public class CommentNotFoundException extends RuntimeException {
     private final ErrorCode errorCode;
 
-    public InvalidTokenException() {
-        super(ErrorCode.INVALID_TOKEN.getMessage());
-        this.errorCode = ErrorCode.INVALID_TOKEN;
+    public CommentNotFoundException() {
+        super(ErrorCode.COMMENT_NOT_FOUND.getMessage());
+        this.errorCode = ErrorCode.COMMENT_NOT_FOUND;
     }
 
     public ErrorCode getErrorCode() {
