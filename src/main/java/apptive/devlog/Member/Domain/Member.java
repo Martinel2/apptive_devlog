@@ -1,7 +1,7 @@
 package apptive.devlog.Member.Domain;
 
 import apptive.devlog.Global.Auth.Attribute.Provider;
-import apptive.devlog.Global.Enum.Gender;
+import apptive.devlog.Member.Enum.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
