@@ -248,9 +248,10 @@
     ---
 
 ---
-
 ### 참고 사이트
 
 [대댓글 (댓글의 댓글) 기능 구현하기](https://velog.io/@hhss2259/%EB%8C%80%EB%8C%93%EA%B8%80-%EB%8C%93%EA%B8%80%EC%9D%98-%EB%8C%93%EA%B8%80-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
 
 [[HTTP] HTTP 상태 401(Unauthorized) vs  403(Forbidden) 차이](https://mangkyu.tistory.com/146)
+
+[[사소한 TIP] Spring Data JPA에서 FindBy 와 FindAllBy 차이점](https://revf.tistory.com/270)
