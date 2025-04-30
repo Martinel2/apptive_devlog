@@ -57,7 +57,7 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostsByTitleAndContent(title,content));
     }
 
-    @GetMapping("/posts/me")
+    @GetMapping("/posts/author")
     public ResponseEntity<List<Post>> getPostsByAuthor(@RequestParam String nickname) {
         return ResponseEntity.ok(postService.getPostsByAuthor(nickname));
     }
