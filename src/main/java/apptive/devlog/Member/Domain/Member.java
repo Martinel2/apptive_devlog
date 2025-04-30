@@ -28,7 +28,8 @@ public class Member {
     private String nickname;
     @Column(name = "birth", nullable = false)
     private LocalDate birth;
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender", nullable = false, columnDefinition = "VARCHAR(20)")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     @Column(name = "password")
     private String password;
