@@ -1,6 +1,5 @@
 package apptive.devlog.Post.Controller;
 
-import apptive.devlog.Global.Auth.Attribute.Provider;
 import apptive.devlog.Global.Exception.PostContentBlankException;
 import apptive.devlog.Global.Exception.PostNoPermissionException;
 import apptive.devlog.Global.Exception.PostNotFoundException;
@@ -158,7 +157,7 @@ class PostControllerTest {
         void readPostSuccess() throws Exception {
             // Given
             Long postId = 1L;
-            when(postService.getPost(postId)).thenReturn(post);
+            when(postService.getOnePost(postId)).thenReturn(post);
 
 
             // When & Then
@@ -175,7 +174,7 @@ class PostControllerTest {
             Long postId = 999L;
 
             // When
-            when(postService.getPost(postId))
+            when(postService.getOnePost(postId))
                 .thenThrow(new PostNotFoundException());
 
             // Then
