@@ -113,7 +113,7 @@ class PostServiceTest {
             when(postRepository.findById(anyLong())).thenReturn(Optional.of(post));
 
             // When
-            Post foundPost = postService.getPost(1L);
+            Post foundPost = postService.getOnePost(1L);
 
             // Then
             assertThat(foundPost).isNotNull();
@@ -128,7 +128,7 @@ class PostServiceTest {
             when(postRepository.findById(anyLong())).thenReturn(Optional.empty());
 
             // When & Then
-            assertThatThrownBy(() -> postService.getPost(999L))
+            assertThatThrownBy(() -> postService.getOnePost(999L))
                 .isInstanceOf(PostNotFoundException.class)
                 .hasFieldOrPropertyWithValue("errorCode", ErrorCode.POST_NOT_FOUND);
         }
