@@ -10,6 +10,9 @@ import apptive.devlog.Post.Domain.Post;
 import apptive.devlog.Post.Dto.CreatePostRequest;
 import apptive.devlog.Post.Dto.UpdatePostRequest;
 import apptive.devlog.Post.Repository.PostRepository;
+import apptive.devlog.Global.Mail.MailQueueService;
+import apptive.devlog.Global.Mail.MailTemplateService;
+import apptive.devlog.Follow.Service.FollowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +27,9 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final MailQueueService mailQueueService;
+    private final MailTemplateService mailTemplateService;
+    private final FollowService followService;
 
     @Override
     @Transactional
@@ -36,6 +42,13 @@ public class PostServiceImpl implements PostService {
         post.setAuthor(member);
 
         Post savedPost = postRepository.save(post);
+        List<Member> followers = followService.getFollowers(member);
+        for (Member follower : followers) {
+            if (!follower.isMailOptOut()) {
+                String mailContent = mailTemplateService.buildFollowPostTemplate(member.getNickname(), post.getTitle());
+                mailQueueService.enqueueMail(follower.getEmail(), mailContent);
+            }
+        }
         return savedPost.getId();
     }
 
