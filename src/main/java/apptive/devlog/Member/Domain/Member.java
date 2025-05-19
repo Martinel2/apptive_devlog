@@ -37,6 +37,9 @@ public class Member {
     @Column(name = "provider", nullable = false)
     private Provider provider;
 
+    @Column(name = "mail_opt_out", nullable = false)
+    private boolean mailOptOut = false;
+
     public Member(String email, String name, String nickname, LocalDate birth, Gender gender, String encodePwd) {
         this.email = email;
         this.name = name;
@@ -67,6 +70,18 @@ public class Member {
     @Override
     public int hashCode() {
         return Objects.hash(email, password);
+    }
+
+    public boolean isMailOptOut() {
+        return mailOptOut;
+    }
+
+    public void setMailOptOut(boolean mailOptOut) {
+        this.mailOptOut = mailOptOut;
+    }
+
+    public String getEmail() {
+        return this.email;
     }
 }
 

@@ -10,6 +10,8 @@ import apptive.devlog.Comment.Repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import apptive.devlog.Global.Mail.MailQueueService;
+import apptive.devlog.Global.Mail.MailTemplateService;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +20,8 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
+    private final MailQueueService mailQueueService;
+    private final MailTemplateService mailTemplateService;
 
     @Override
     @Transactional
@@ -43,6 +47,19 @@ public class CommentServiceImpl implements CommentService {
             }
             
             parentComment.addChild(comment);
+            // 대댓글 알림
+            Member parentAuthor = parentComment.getAuthor();
+            if (!parentAuthor.isMailOptOut()) {
+                String mailContent = mailTemplateService.buildReplyTemplate(request.getContent());
+                mailQueueService.enqueueMail(parentAuthor.getEmail(), mailContent);
+            }
+        } else {
+            // 댓글 알림
+            Member postAuthor = post.getAuthor();
+            if (!postAuthor.isMailOptOut()) {
+                String mailContent = mailTemplateService.buildCommentTemplate(request.getContent());
+                mailQueueService.enqueueMail(postAuthor.getEmail(), mailContent);
+            }
         }
 
         Comment savedComment = commentRepository.save(comment);
