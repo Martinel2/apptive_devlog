@@ -1,5 +1,5 @@
-# 최신 17-jdk-alpine 이미지로부터 시작
-FROM openjdk:17-jdk-slim
+# 최신 21-jdk-alpine 이미지로부터 시작
+FROM openjdk:21-jdk-slim
 
 EXPOSE 8080
 

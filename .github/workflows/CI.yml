@@ -66,8 +66,8 @@ jobs:
       # Build and Push Docker Image
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/todo:latest .
-          docker push ${{ secrets.DOCKER_USERNAME }}/todo:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/devlog:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/devlog:latest
 
       - name: Create .ssh directory and add EC2 host key
         run: |
