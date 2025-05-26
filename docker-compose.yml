@@ -13,8 +13,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/conf.d:/etc/mysql/conf.d # MySQL 설정 파일 위치
-      - mysql-data:/var/lib/mysql  # MySQL 데이터를 외부 볼륨에 저장
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - mysql-data:/var/lib/mysql
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_general_ci
@@ -24,7 +24,7 @@ services:
   backend:
     container_name: backend
     depends_on:
-      - mysql  # ✅ MySQL이 먼저 실행된 후 backend 시작
+      - mysql
     environment:
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devlog?useSSL=false&allowPublicKeyRetrieval=true
@@ -52,7 +52,9 @@ services:
     networks:
       - backend-network
 
-
 networks:
   backend-network:
     driver: bridge
+
+volumes:
+  mysql-data:  # 🔧 추가됨
